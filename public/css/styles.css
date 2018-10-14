@@ -1,0 +1,88 @@
+:root{
+    --accent: #ff6666;
+}
+
+.navbar{
+    border-top: 1px solid lightgray;
+    border-bottom: 1px solid lightgray;
+}
+.nav-item{
+    padding: 0 10px;
+}
+.navbar-brand{
+    font-size: 1em;
+    font-weight: bold;
+}
+.navbar a{
+    color: black;
+}
+.navbar a:hover{
+    background-color: transparent;
+}
+.navbar-nav li{
+    list-style: none;
+}
+.navbar-light .navbar-nav .nav-link.active, .breadcrumb-item.active a{
+    color: var(--accent);
+    font-size: .9em;
+}
+.breadcrumb-item a, .navbar-light .navbar-nav .nav-link{
+    color: black;
+    text-transform: uppercase;
+    font-size: .9em;
+}
+.breadcrumb-item+.breadcrumb-item::before{
+    color: black;
+}
+
+
+hr{
+    border-color: lightgray;
+}
+.item-name a{
+    color: #1d2124;
+    font-size: 1.2em;
+}
+.item-name a:hover{
+    text-decoration: none;
+}
+.item-img{
+    width: 200px;
+}
+.item-price{
+    font-size: 1.2em;
+    font-weight: bold;
+}
+#qty{
+    height: 37px;
+}
+
+.btn-accent{
+    background-color: var(--accent);
+    color: white;
+
+}
+.btn-accent:hover{
+    background-color: #ff4d4d;
+}
+.detail-btn{
+    padding: 3px 15px;
+    font-size: 1.4em;
+    margin-left: 5px;
+}
+
+
+/*-------------
+Admin
+ ---------------*/
+.admin-description{
+    max-width: 250px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+
+}
+.productForm{
+    border: 1px solid lightgray;
+    padding: 30px;
+}
