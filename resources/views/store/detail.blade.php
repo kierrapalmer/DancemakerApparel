@@ -4,7 +4,7 @@
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb bg-transparent pb-0">
             <li class="breadcrumb-item"><a href="{{route('store.index')}}">Home</a></li>
-            <li class="breadcrumb-item active" aria-current="page"><a href="#">{{$item['category']}}</a></li>
+            <li class="breadcrumb-item active" aria-current="page"><a href="#">{{$item->category}}</a></li>
         </ol>
     </nav>
     <hr>
@@ -12,13 +12,13 @@
     <div class="container">
     <div class="row mb-4">
         <div class="col-md-6">
-            <img src="{{$item['imgUrl']}}" alt="productImage">
+            <img src="{{$item->imgUrl}}" alt="productImage">
 
         </div>
         <div class="col-md-6">
-            <h2 class="detail-name">{{ $item['name']  }}</h2>
+            <h2 class="detail-name">{{ $item->name  }}</h2>
             <hr>
-            <p class="detail-price">${{$item['price']}}</p>
+            <p class="detail-price">${{$item->price}}</p>
             <select name="qty" id="qty">
                 <option value="1">1</option>
                 <option value="2">2</option>
@@ -33,7 +33,7 @@
             </select>
             <input type="button" class="btn btn-accent detail-btn" value="Add to Bag">
             <hr>
-            <p>{{$item['description']}}</p>
+            <p>{{$item->description}}</p>
         </div>
     </div>
     </div>

@@ -19,17 +19,19 @@
             <th>Name</th>
             <th>Price</th>
             <th>Description</th>
-        <th>Action</th>
+        <th>Edit</th>
+        <th>Delete</th>
         </thead>
 
         @foreach($items as $item)
             <tr>
-                <td>{{$item['category']}} </td>
-                <td><img src="{{ $item['imgUrl'] }}" alt="item photo" width="50px" class="admin-photo"></td>
-                <td>{{$item['name']}} </td>
-                <td>${{$item['price']}} </td>
-                <td class="admin-description">{{$item['description']}} </td>
-                <td><a href="{{route('admin.edit', ['id'=> array_search($item, $items)])}}"><i class="fas fa-pencil-alt"></i></a></td>
+                <td>{{$item->category}} </td>
+                <td><img src="{{ $item->imgUrl }}" alt="item photo" width="50px" class="admin-photo"></td>
+                <td>{{$item->name}} </td>
+                <td>${{$item->price}} </td>
+                <td class="admin-description">{{$item->description}} </td>
+                <td><a href="{{route('admin.edit', ['id' => $item->id] )}}"><i class="fas fa-pencil-alt"></i></a></td>
+                <td><a href="{{route('admin.delete', ['id' => $item->id] )}}"><i class="fas fa-trash-alt"></i></a></td>
             </tr>
         @endforeach
 

@@ -7,67 +7,73 @@
 	use Illuminate\Session\Store;
 
 	class ItemController extends Controller {
-		public function getIndex(Store $session) {
-			$item = new Item();
-			$items = $item->getItems($session);
+		public function getIndex() {
+			$items =  Item::orderBy('created_at')->paginate(3);
 			return view('store.index', ['items' => $items]);
 		}
 
-		public function getItem(Store $session, $id) {
-			$item = new Item();
-			$item = $item->getItem($session, $id);
+		public function getItem($id) {
+			$item = Item::where('id', '=', $id)->first();
+
 			return view('store.detail', ['item' => $item]);
 		}
 
 
-		public function getAdminIndex(Store $session) {
-			$item = new item();
-			$items = $item->getitems($session);
+		public function getAdminIndex() {
+			$items =  Item::orderBy('category', 'asc')->get();
 			return view('admin.index', ['items' => $items]);
 		}
 
 		public function getAdminCreate() {
+
 			return view('admin.create');
 		}
 
-		public function getAdminEdit(Store $session, $id) {
-			$item = new item();
-			$item = $item->getitem($session, $id);
+		public function getAdminEdit($id) {
+			$item = Item::find($id);
 			return view('admin.edit', ['item' => $item, 'itemId' => $id]);
+
 		}
 
-		public function postAdminCreate(Store $session, Request $request) {
+		public function postAdminCreate(Request $request) {
 			$this->validate($request, [
 				'name' => 'required|min:5',
 				'description' => 'required|min:10',
 				'category' => 'required'
 			]);
-			$item = new item();
-			$item->additem($session,
-				$request->input('name'),
-				$request->input('price'),
-				$request->input('category'),
-				$request->input('description'),
-				$request->input('imgUrl'));
-			return redirect()->route('admin.index')
-				->with('info', $request->input('name'). ' item created' );
+			$item = new Item([
+				'name' => $request->input('name'),
+				'price' => $request->input('price'),
+				'category' => $request->input('category'),
+				'description' => $request->input('description'),
+				'imgUrl' => $request->input('imgUrl')
+			]);
+			$item->save();
+
+			return redirect()->route('admin.index')->with('info', 'item created, Title is: ' . $request->input('name'));
+
 		}
 
-		public function postAdminUpdate(Store $session, Request $request) {
+		public function postAdminUpdate(Request $request) {
 			$this->validate($request, [
 				'name' => 'required|min:5',
 				'description' => 'required|min:10',
 				'category' => 'required'
 			]);
-			$item = new item();
-			$item->edititem($session,
-				$request->input('id'),
-				$request->input('name'),
-				$request->input('price'),
-				$request->input('category'),
-				$request->input('description'),
-				$request->input('imgUrl'));
-			return redirect()->route('admin.index')
-				->with('info', $request->input('name'). ' item updated' );
+			$item = Item::find($request->input('id'));
+			$item->name = $request->input(['name']);
+			$item->price = $request->input(['price']);
+			$item->category = $request->input(['category']);
+			$item->description = $request->input(['description']);
+			$item->imgUrl = $request->input(['imgUrl']);
+			$item->save();
+			return redirect()->route('admin.index')->with('info', 'item edited, new Title is: ' . $request->input('name'));
+
+		}
+
+		public function getAdminDelete($id){
+			$item = Item::find($id);
+			$item->delete();
+			return redirect()->route('admin.index')->with('info', 'Post Deleted');
 		}
 	}
