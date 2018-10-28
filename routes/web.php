@@ -22,7 +22,7 @@ Route::get('detail/{id}', [
 ]);
 
 
-Route::group(['prefix' => 'admin'], function() {
+Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function() {
 	Route::get('', [
 		'uses' => 'ItemController@getAdminIndex',
 		'as' => 'admin.index'
@@ -53,4 +53,6 @@ Route::group(['prefix' => 'admin'], function() {
 		'as' => 'admin.delete'
 	]);
 });
+
+	Auth::routes();
 

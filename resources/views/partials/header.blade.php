@@ -8,18 +8,18 @@
 
         <li class="nav-item">
             {{--<a class="nav-link" href="{{route('other.about')}}">Shoes</a>--}}
-            <a class="nav-link {{$item->category == 'Shoes' ? 'active' : null }}" href="#">Shoes</a>
+            <a class="nav-link" href="#">Shoes</a>
         </li>
 
         <li class="nav-item">
-            <a class="nav-link {{$item->category == 'Dresses' ? 'active' : null }}" href="#">Dresses</a>
+            <a class="nav-link" href="#">Dresses</a>
         </li>
 
         <li class="nav-item">
-            <a class="nav-link {{$item->category == 'Tights' ? 'active' : null }}" href="#">Tights</a>
+            <a class="nav-link " href="#">Tights</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link {{$item->category == 'Leotards' ? 'active' : null }}" href="#">Leotards</a>
+            <a class="nav-link" href="#">Leotards</a>
         </li>
 
     </ul>
