@@ -7,7 +7,32 @@
 	use Illuminate\Session\Store;
 
 	class ItemController extends Controller {
-		public function getIndex() {
+		public function index(){
+			return response()->json(Item::paginate(2), 200);
+		}
+
+		public function show($id) {
+			return response()->json(Item::find($id), 200);
+		}
+
+		public function add(Request $request) {
+			$item = Item::create($request->all());
+			return response()->json($item, 201);
+		}
+
+		public function update(Request $request, Item $item) {
+			$item->update($request->all());
+			return response()->json($item, 200);
+		}
+
+		public function delete(Request $request, Item $Item) {
+			$Item->delete();
+			return response()->json(null, 204);
+		}
+
+
+		//CRUD
+		  public function getIndex() {
 			$items =  Item::orderBy('created_at')->paginate(3);
 			return view('store.index', ['items' => $items]);
 		}
